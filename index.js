@@ -17,11 +17,22 @@ app.use(express.static('public'));
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/contactform';
-    await mongoose.connect(mongoURI);
-    console.log('Connected to MongoDB');
+    console.log('🔄 Attempting to connect to MongoDB Atlas...');
+    
+    await mongoose.connect(mongoURI, {
+      serverSelectionTimeoutMS: 15000, // Longer timeout for Atlas
+      connectTimeoutMS: 15000,
+      socketTimeoutMS: 15000,
+      maxPoolSize: 10,
+      retryWrites: true,
+    });
+    
+    console.log('✅ Successfully connected to MongoDB Atlas!');
+    return true;
   } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
+    console.error('❌ MongoDB connection failed:', error.message);
+    console.log('🔄 Running in demo mode - form submissions will not be saved');
+    return false;
   }
 };
 
@@ -66,6 +77,21 @@ app.post('/api/contact', async (req, res) => {
       return res.status(400).json({
         success: false,
         message: 'Please provide all required fields: name, email, and phone'
+      });
+    }
+
+    // If database is not connected, return demo response
+    if (!isDBConnected) {
+      console.log('Demo mode: Contact received:', { name, email, phone });
+      return res.status(201).json({
+        success: true,
+        message: 'Your details have been saved successfully! (Demo mode - not actually saved)',
+        contact: {
+          name,
+          email,
+          phone,
+          createdAt: new Date()
+        }
       });
     }
 
@@ -125,12 +151,18 @@ app.get('/api/contacts', async (req, res) => {
   }
 });
 
+// Global variable to track database connection
+let isDBConnected = false;
+
 // Start server
 const startServer = async () => {
-  await connectDB();
+  isDBConnected = await connectDB();
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
     console.log(`Visit: http://localhost:${PORT}`);
+    if (!isDBConnected) {
+      console.log('⚠️  Database not connected - running in demo mode');
+    }
   });
 };
 

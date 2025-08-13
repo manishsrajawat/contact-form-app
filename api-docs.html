@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form API Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .endpoint {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-left: 5px solid #667eea;
+        }
+
+        .method {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        .method.post {
+            background-color: #28a745;
+        }
+
+        .method.get {
+            background-color: #007bff;
+        }
+
+        .endpoint-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .endpoint-url {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            background-color: #f1f3f4;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .section {
+            margin: 25px 0;
+        }
+
+        .section h3 {
+            color: #495057;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .code-block {
+            background-color: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .table th, .table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .required {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .optional {
+            color: #6c757d;
+            font-style: italic;
+        }
+
+        .status-code {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: white;
+            font-size: 0.85rem;
+        }
+
+        .status-200 { background-color: #28a745; }
+        .status-201 { background-color: #17a2b8; }
+        .status-400 { background-color: #dc3545; }
+        .status-500 { background-color: #6c757d; }
+
+        .note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .note strong {
+            color: #856404;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #6c757d;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .nav {
+            background: white;
+            padding: 20px 0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #f8f9fa;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contact Form API</h1>
+            <p>RESTful API Documentation for Contact Management System</p>
+        </div>
+
+        <div class="nav">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#endpoints">Endpoints</a></li>
+                <li><a href="#models">Data Models</a></li>
+                <li><a href="#examples">Examples</a></li>
+            </ul>
+        </div>
+
+        <div id="overview" class="endpoint">
+            <h2 class="endpoint-title">API Overview</h2>
+            <p>This API provides endpoints for managing contact form submissions. It supports creating new contacts and retrieving existing ones from a MongoDB database.</p>
+            
+            <div class="section">
+                <h3>Base URL</h3>
+                <div class="endpoint-url">http://localhost:3000</div>
+            </div>
+
+            <div class="section">
+                <h3>Content Type</h3>
+                <p>All requests and responses use <code>application/json</code> content type.</p>
+            </div>
+
+            <div class="note">
+                <strong>Note:</strong> The API supports both live database mode and demo mode. In demo mode, contact submissions are logged but not actually saved to the database.
+            </div>
+        </div>
+
+        <div id="endpoints">
+            <div class="endpoint">
+                <span class="method post">POST</span>
+                <h2 class="endpoint-title">Create Contact</h2>
+                <div class="endpoint-url">POST /api/contact</div>
+                <p>Creates a new contact entry in the database.</p>
+
+                <div class="section">
+                    <h3>Request Body</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Field</th>
+                                <th>Type</th>
+                                <th>Required</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>name</td>
+                                <td>string</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>Contact's full name (trimmed)</td>
+                            </tr>
+                            <tr>
+                                <td>email</td>
+                                <td>string</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>Contact's email address (lowercase, trimmed)</td>
+                            </tr>
+                            <tr>
+                                <td>phone</td>
+                                <td>string</td>
+                                <td><span class="required">Yes</span></td>
+                                <td>Contact's phone number (trimmed)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>Response Codes</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="status-code status-201">201</span></td>
+                                <td>Contact created successfully</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-400">400</span></td>
+                                <td>Missing required fields or validation error</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-500">500</span></td>
+                                <td>Server error</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>Success Response Example</h3>
+                    <div class="code-block">{
+  "success": true,
+  "message": "Your details have been saved successfully!",
+  "contact": {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "+1234567890",
+    "createdAt": "2025-08-13T08:47:48.014Z"
+  }
+}</div>
+                </div>
+
+                <div class="section">
+                    <h3>Error Response Example</h3>
+                    <div class="code-block">{
+  "success": false,
+  "message": "Please provide all required fields: name, email, and phone"
+}</div>
+                </div>
+            </div>
+
+            <div class="endpoint">
+                <span class="method get">GET</span>
+                <h2 class="endpoint-title">Get All Contacts</h2>
+                <div class="endpoint-url">GET /api/contacts</div>
+                <p>Retrieves all contacts from the database, sorted by creation date (newest first).</p>
+
+                <div class="section">
+                    <h3>Response Codes</h3>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="status-code status-200">200</span></td>
+                                <td>Contacts retrieved successfully</td>
+                            </tr>
+                            <tr>
+                                <td><span class="status-code status-500">500</span></td>
+                                <td>Server error</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section">
+                    <h3>Success Response Example</h3>
+                    <div class="code-block">{
+  "success": true,
+  "count": 3,
+  "contacts": [
+    {
+      "_id": "689c5134d5ce554014b86346",
+      "name": "1.localmongo",
+      "email": "local@mongo.db",
+      "phone": "999999999",
+      "createdAt": "2025-08-13T08:47:48.014Z",
+      "__v": 0
+    },
+    {
+      "_id": "689aefe2bbcc212abfe5414a",
+      "name": "222",
+      "email": "222@222.com",
+      "phone": "2222222",
+      "createdAt": "2025-08-12T07:40:18.161Z",
+      "__v": 0
+    }
+  ]
+}</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="models" class="endpoint">
+            <h2 class="endpoint-title">Data Models</h2>
+            
+            <div class="section">
+                <h3>Contact Model</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>_id</td>
+                            <td>ObjectId</td>
+                            <td>Unique MongoDB identifier</td>
+                        </tr>
+                        <tr>
+                            <td>name</td>
+                            <td>String</td>
+                            <td>Contact's full name (required, trimmed)</td>
+                        </tr>
+                        <tr>
+                            <td>email</td>
+                            <td>String</td>
+                            <td>Contact's email (required, lowercase, trimmed)</td>
+                        </tr>
+                        <tr>
+                            <td>phone</td>
+                            <td>String</td>
+                            <td>Contact's phone number (required, trimmed)</td>
+                        </tr>
+                        <tr>
+                            <td>createdAt</td>
+                            <td>Date</td>
+                            <td>Timestamp when contact was created</td>
+                        </tr>
+                        <tr>
+                            <td>__v</td>
+                            <td>Number</td>
+                            <td>Mongoose version key</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="examples" class="endpoint">
+            <h2 class="endpoint-title">Usage Examples</h2>
+            
+            <div class="section">
+                <h3>JavaScript/Fetch API</h3>
+                <div class="code-block">// Create a new contact
+const createContact = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: 'Jane Smith',
+        email: 'jane.smith@example.com',
+        phone: '+1-555-0123'
+      })
+    });
+    
+    const result = await response.json();
+    console.log(result);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+// Get all contacts
+const getAllContacts = async () => {
+  try {
+    const response = await fetch('http://localhost:3000/api/contacts');
+    const result = await response.json();
+    console.log(`Found ${result.count} contacts:`, result.contacts);
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};</div>
+            </div>
+
+            <div class="section">
+                <h3>cURL Examples</h3>
+                <div class="code-block"># Create a new contact
+curl -X POST http://localhost:3000/api/contact \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Mike Johnson",
+    "email": "mike.johnson@example.com",
+    "phone": "+1-555-9876"
+  }'
+
+# Get all contacts
+curl -X GET http://localhost:3000/api/contacts</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Contact Form API Documentation | Generated on August 13, 2025</p>
+            <p>For questions or issues, please contact the development team.</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add copy functionality to code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    const originalBg = this.style.backgroundColor;
+                    this.style.backgroundColor = '#2d5a27';
+                    setTimeout(() => {
+                        this.style.backgroundColor = originalBg;
+                    }, 200);
+                });
+            });
+            
+            // Add cursor pointer to indicate clickable
+            block.style.cursor = 'pointer';
+            block.title = 'Click to copy code';
+        });
+    </script>
+</body>
+</html>

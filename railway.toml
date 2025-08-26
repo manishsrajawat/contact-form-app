@@ -1,0 +1,15 @@
+[build]
+command = "cd SSP && npm install"
+
+[deploy]
+startCommand = "cd SSP && npm start"
+restartPolicyType = "ON_FAILURE"
+
+[environments.production]
+variables = {}
+
+[environments.production.build]
+command = "cd SSP && npm install"
+
+[environments.production.deploy]
+startCommand = "cd SSP && npm start"

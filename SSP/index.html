@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSP Dashboard - Supply Side Platform</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1>SSP Pro</h1>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                        </svg>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="inventoryLink">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 3a2 2 0 100 4h12a2 2 0 100-4H4z"></path>
+                            <path fill-rule="evenodd" d="M3 8h14v7a2 2 0 01-2 2H5a2 2 0 01-2-2V8zm5 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        Inventory
+                        <svg class="ml-auto" width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"></path>
+                        </svg>
+                        Analytics
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                        </svg>
+                        Integration
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"></path>
+                        </svg>
+                        Settings
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <h1>Dashboard</h1>
+                <div class="header-actions">
+                    <button class="btn btn-secondary" id="refreshBtn">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z" clip-rule="evenodd"></path>
+                        </svg>
+                        Refresh
+                    </button>
+                    <button class="btn btn-primary" id="addPropertyBtn">
+                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd"></path>
+                        </svg>
+                        Add Property
+                    </button>
+                </div>
+            </header>
+
+            <!-- Properties Grid -->
+            <div class="cards-grid" id="propertiesGrid">
+                <!-- Example Property Cards -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">TechNews.com</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Website • News & Media</p>
+                        </div>
+                        <span class="card-status status-active">Active</span>
+                    </div>
+                    <div class="card-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$1,247</div>
+                            <div class="metric-label">Revenue</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">87%</div>
+                            <div class="metric-label">Fill Rate</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$3.42</div>
+                            <div class="metric-label">eCPM</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">156K</div>
+                            <div class="metric-label">Impressions</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn btn-secondary" onclick="viewProperty('website-1')">View Details</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">GameZone Mobile</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">Mobile App • Gaming</p>
+                        </div>
+                        <span class="card-status status-active">Active</span>
+                    </div>
+                    <div class="card-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$2,893</div>
+                            <div class="metric-label">Revenue</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">94%</div>
+                            <div class="metric-label">Fill Rate</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$4.67</div>
+                            <div class="metric-label">eCPM</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">234K</div>
+                            <div class="metric-label">Impressions</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn btn-secondary" onclick="viewProperty('app-1')">View Details</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">CookingTV Channel</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">CTV • Lifestyle</p>
+                        </div>
+                        <span class="card-status status-paused">Paused</span>
+                    </div>
+                    <div class="card-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$0</div>
+                            <div class="metric-label">Revenue</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0%</div>
+                            <div class="metric-label">Fill Rate</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$0.00</div>
+                            <div class="metric-label">eCPM</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0</div>
+                            <div class="metric-label">Impressions</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn btn-secondary" onclick="viewProperty('ctv-1')">View Details</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <h3 class="card-title">Mall Digital Screens</h3>
+                            <p style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 0.5rem;">DOOH • Retail</p>
+                        </div>
+                        <span class="card-status status-pending">Pending</span>
+                    </div>
+                    <div class="card-metrics">
+                        <div class="metric">
+                            <div class="metric-value">$0</div>
+                            <div class="metric-label">Revenue</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0%</div>
+                            <div class="metric-label">Fill Rate</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">$0.00</div>
+                            <div class="metric-label">eCPM</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-value">0</div>
+                            <div class="metric-label">Impressions</div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 1.5rem;">
+                        <button class="btn btn-secondary" onclick="viewProperty('dooh-1')">View Details</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Property Modal -->
+    <div class="modal" id="addPropertyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Property</h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Progress Indicator -->
+                <div class="progress-indicator">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <span>Property Type</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <span>Placements</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <span>Creative Settings</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <span>Integration</span>
+                    </div>
+                    <div class="step-connector"></div>
+                    <div class="progress-step" data-step="5">
+                        <div class="step-number">5</div>
+                        <span>Summary</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Property Type Selection -->
+                <div class="wizard-step" id="step1" style="display: block;">
+                    <h3 style="margin-bottom: 2rem; color: var(--text-primary);">Choose Property Type</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem;">
+                        <div class="property-type-card" data-type="website">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <svg width="24" height="24" fill="var(--accent-blue)" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4.083 9h1.946c.089-1.546.383-2.97.837-4.118A6.004 6.004 0 004.083 9zM10 2a8 8 0 100 16 8 8 0 000-16zm0 2c-.076 0-.232.032-.465.262-.238.234-.497.623-.737 1.182-.389.907-.673 2.142-.766 3.556h3.936c-.093-1.414-.377-2.649-.766-3.556-.24-.56-.5-.948-.737-1.182C10.232 4.032 10.076 4 10 4zm3.971 5c-.089-1.546-.383-2.97-.837-4.118A6.004 6.004 0 0115.917 9h-1.946zm-2.003 2H8.032c.093 1.414.377 2.649.766 3.556.24.56.5.948.737 1.182.233.23.389.262.465.262.076 0 .232-.032.465-.262.238-.234.498-.623.737-1.182.389-.907.673-2.142.766-3.556zm1.166 4.118c.454-1.147.748-2.572.837-4.118h1.946a6.004 6.004 0 01-2.783 4.118zm-6.268 0C6.412 13.97 6.118 12.546 6.03 11H4.083a6.004 6.004 0 002.783 4.118z" clip-rule="evenodd"></path>
+                                </svg>
+                                <h4 style="margin-left: 1rem; color: var(--text-primary);">Website</h4>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Add banner, native, and video ads to your website</p>
+                            <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                <li>• Display & Video ads</li>
+                                <li>• Native advertising</li>
+                                <li>• Sticky & Outstream formats</li>
+                            </ul>
+                        </div>
+
+                        <div class="property-type-card" data-type="mobile-app">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <svg width="24" height="24" fill="var(--accent-blue)" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v12a2 2 0 002 2h6a2 2 0 002-2V4a2 2 0 00-2-2H7zM6 4a1 1 0 011-1h6a1 1 0 011 1v10a1 1 0 01-1 1H7a1 1 0 01-1-1V4zm2.5 10a.5.5 0 000 1h3a.5.5 0 000-1h-3z" clip-rule="evenodd"></path>
+                                </svg>
+                                <h4 style="margin-left: 1rem; color: var(--text-primary);">Mobile App</h4>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Monetize iOS and Android apps with mobile-first ads</p>
+                            <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                <li>• Interstitial & Banner ads</li>
+                                <li>• Rewarded video ads</li>
+                                <li>• Playable ad formats</li>
+                            </ul>
+                        </div>
+
+                        <div class="property-type-card" data-type="ctv">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <svg width="24" height="24" fill="var(--accent-blue)" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4V5h12v10z" clip-rule="evenodd"></path>
+                                </svg>
+                                <h4 style="margin-left: 1rem; color: var(--text-primary);">CTV Channel</h4>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Connected TV advertising with VAST/VMAP</p>
+                            <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                <li>• Pre-roll & Mid-roll ads</li>
+                                <li>• Ad pod management</li>
+                                <li>• VAST 4.0 compatible</li>
+                            </ul>
+                        </div>
+
+                        <div class="property-type-card" data-type="dooh">
+                            <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+                                <svg width="24" height="24" fill="var(--accent-blue)" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" clip-rule="evenodd"></path>
+                                </svg>
+                                <h4 style="margin-left: 1rem; color: var(--text-primary);">DOOH Screen</h4>
+                            </div>
+                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Digital Out-of-Home screen advertising</p>
+                            <ul style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+                                <li>• Screen zone management</li>
+                                <li>• Loop slot scheduling</li>
+                                <li>• Location-based targeting</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem; text-align: right;">
+                        <button class="btn btn-primary" id="nextStep1" disabled>Continue</button>
+                    </div>
+                </div>
+
+                <!-- Placeholder for other steps -->
+                <div class="wizard-step" id="step2" style="display: none;">
+                    <h3>Placement Creation</h3>
+                    <p>Step 2 content will be loaded here...</p>
+                </div>
+
+                <div class="wizard-step" id="step3" style="display: none;">
+                    <h3>Creative Settings</h3>
+                    <p>Step 3 content will be loaded here...</p>
+                </div>
+
+                <div class="wizard-step" id="step4" style="display: none;">
+                    <h3>Tag/SDK Integration</h3>
+                    <p>Step 4 content will be loaded here...</p>
+                </div>
+
+                <div class="wizard-step" id="step5" style="display: none;">
+                    <h3>Summary & Activation</h3>
+                    <p>Step 5 content will be loaded here...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

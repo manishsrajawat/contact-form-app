@@ -1,0 +1,27 @@
+{
+  "name": "ssp-dashboard",
+  "version": "1.0.0",
+  "description": "Modern Supply-Side Platform Dashboard for Ad Publishers",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p $PORT -c-1",
+    "dev": "npx http-server . -p 3000 -c-1 -o",
+    "build": "echo 'Static site - no build needed'"
+  },
+  "keywords": [
+    "ssp",
+    "supply-side-platform",
+    "advertising",
+    "dashboard",
+    "programmatic",
+    "ad-tech"
+  ],
+  "author": "SSP Pro",
+  "license": "MIT",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
